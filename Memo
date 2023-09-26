@@ -1,0 +1,3 @@
+When commiting to GitHub using steamcommunity_302 as proxy, Git will propably complain about an SSL certificate error.
+The solution is simple, just use following command to skip SSL certification:
+git config --global http.sslVerify false
