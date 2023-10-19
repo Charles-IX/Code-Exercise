@@ -3,9 +3,12 @@
 // 如果运算符合法，输出表达式的值；若运算符不合法或进行除法运算时除数是0，则输出"Wrong input!"。最后结果小数点后保留两位。
 #include <stdio.h>
 int main(void){
-    double s1, s2, ans;
+    double s1, s2;
     char op;
-    scanf("%lf %c %lf", &s1, &op, &s2);
+    if (scanf("%lf %c %lf", &s1, &op, &s2)!=3){
+        printf("Wrong input!");
+    }
+    else{
     switch (op){
     case '+':
         printf("%.2f", s1 + s2);
@@ -27,6 +30,7 @@ int main(void){
     default:
         printf("Wrong input!");
         break;
+    }
     }
     return 0;
 }
