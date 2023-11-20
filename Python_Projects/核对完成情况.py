@@ -1,14 +1,17 @@
 import os
 
 def task_name(directory):
+    global lesson_name
     directory_lst = str(directory).split("/")
-    class_name = str(directory_lst[-3])
-    lesson_name = str(directory_lst[-2])
+    class_name = str(directory_lst[-2])
+    lesson_name = str(directory_lst[-1])
+    print("="*40)
     print("{} - {}".format(class_name, lesson_name))
     print("="*40)
-    print()
 
 def check_directories(directory, txt_file):
+    global check_directories_valid
+    check_directories_valid = 0
     # 从txt文件中读取所有的名字并存入names列表
     with open(txt_file, 'r') as file:
         names = [_.rstrip('\n') for _ in file.readlines()]
@@ -22,7 +25,8 @@ def check_directories(directory, txt_file):
         for name in missing_names:
             print(name)
     else:
-        print("全部人员已提交。")
+        print("所有同学均已提交。")
+        check_directories_valid = 1
     print()
 
 def count_files(directory):
@@ -34,6 +38,8 @@ def count_files(directory):
     return file_count
 
 def check_file_counts(directory, given_value):
+    global check_file_counts_valid
+    check_file_counts_valid = 0
     # 依次读取directory中的内容，如果是目录就把目录名加到subdirectories列表里
     subdirectories = [name for name in os.listdir(directory) if os.path.isdir(os.path.join(directory, name))]
     mismatched_directories = []
@@ -50,10 +56,13 @@ def check_file_counts(directory, given_value):
         for directory in mismatched_directories:
             print(directory)
     else:
-        print("已提交的文件数目符合预期。")
+        print("已提交的文件数目均符合预期。")
+        check_file_counts_valid = 1
     print()
 
 def check_extensions(directory, extensions):
+    global check_extensions_valid
+    check_extensions_valid = 0
     mismatched_directories = []
     for root, dirs, files in os.walk(directory):
         # 忽略给定的directory目录，只考虑其子目录中的文件
@@ -83,16 +92,44 @@ def check_extensions(directory, extensions):
         print()
         print("提示：本次需要提交的文件后缀名应为{}{}。".format(extensions_str, additional))
     else:
-        print("已提交的文件类型符合预期。")
+        print("已提交的文件类型均符合预期。")
+        check_extensions_valid = 1
     print()
-        
+
+def all_done():
+    if check_directories_valid + check_file_counts_valid + check_extensions_valid == 3:
+        print("好耶！全班同学均已完成“{}”所要求的任务。".format(lesson_name))
+    else:
+        print("任务尚未完成，同学仍需努力！")
+    print("="*40)
+    print()
+    print()
+    print()
+
+def automate(master_directory, txt_file):
+    subdirs = [subdir for subdir in os.listdir(master_directory) if os.path.isdir(os.path.join(master_directory, subdir))]
+    for subdir in subdirs:
+        directory = os.path.join(master_directory, subdir)
+        requirements = directory+"/requirements"
+        with open(requirements, 'r') as file:
+            file_contents = file.readlines()
+        for line in file_contents:
+            if 'count' in line:
+                count = int(line.split('=')[1].strip())
+            if 'extensions' in line:
+                # 这一行借用了GPT之力。天知道这一行切片是怎么切的。
+                extensions = line.split("'")[1::2]
+
+        task_name(directory)
+        check_directories(directory, txt_file)
+        check_file_counts(directory, count)
+        check_extensions(directory, extensions)
+        all_done()
+
+
 
 txt_file = '/home/charles/OneDrive/轻大文件/行软23-02/行软23-02 名单.txt'
-directory = '/home/charles/Documents/计算机基础实践课程作业/第四章_PowerPoint/'
-count = 2
-extensions = ['.pptx', '.ppt']
+master_directory = '/home/charles/Documents/计算机基础实践课程作业/'
 
-task_name(directory)
-check_directories(directory, txt_file)
-check_file_counts(directory, count)
-check_extensions(directory, extensions)
+
+automate(master_directory, txt_file)
