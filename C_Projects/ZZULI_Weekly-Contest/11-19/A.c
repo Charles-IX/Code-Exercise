@@ -27,7 +27,30 @@ OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
  */
 #include <stdio.h>
 int main(void){
-    for (int i = 0; i < 25; i++){
-        char set i
-    }
+    printf("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n"
+"OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n"
+"OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n"
+"OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n"
+"OOOOOOooooooooooooooooOOOOOOOOOOOOOO@@OO@@@@@@@@OO@@OOOOOOOOOOOOO\n"
+"ooooooooooooooooooooooooooooooOOOO@@  @@        @@  @@OOOOOOOOOOO\n"
+"oooooooooooooooooooooooooooooooooo@@                @@OOOOOOOOOOO\n"
+"oooooooo..............oooooooooo@@                  @@OOOOOOOOOOO\n"
+"..............................@@          @@    @@    @@OOOOOOOOO\n"
+".........                 @@@@                        @@OOOOOOOOO\n"
+"..          @@@@@@@@@@@@@@                  @@@@      @@OOOOOOOOO\n"
+"          @@                            @@    @@  @@  @@OOOOOOOOO\n"
+"            @@@@@@                        @@@@@@@@    @@OOOOOOOOO\n"
+"                @@                                    @@OOOOOOOOO\n"
+"                @@                                    @@OOOOOOOOO\n"
+"                @@                                    @@OOOOOOOOO\n"
+"      ..........@@                                    @@OOOOOOOOO\n"
+"..................@@                                  @@OOOOOOOOO\n"
+"..................@@                                @@OOOOOOOOOOO\n"
+"......oooooooooooo@@    @@@@    @@@@@@@@    @@@@    @@OOOOOOOOOOO\n"
+"oooooooooooooooooo@@    @@OO@@  @@OOOOOO@@  @@@@    @@OOOOOOOOOOO\n"
+"oooooooooooooooooooo@@  @@OOOO@@OOOOOOOOOO@@OOOO@@  @@OOOOOOOOOOO\n"
+"ooooooOOOOOOOOOOOOOOOO@@OOOOOOOOOOOOOOOOOOOOOOOOOO@@OOOOOOOOOOOOO\n"
+"OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n"
+"OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+    return 0;
 }
