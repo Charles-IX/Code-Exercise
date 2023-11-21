@@ -1,11 +1,17 @@
+import datetime
 import os
+
+def time_now():
+    time = datetime.datetime.now()
+    print("截止到", str(time)[:-10])
+    print()
 
 def task_name(directory):
     global lesson_name
     directory_lst = str(directory).split("/")
     class_name = str(directory_lst[-2])
     lesson_name = str(directory_lst[-1])
-    print("="*40)
+#    print("="*40)
     print("{} - {}".format(class_name, lesson_name))
     print("="*40)
 
@@ -25,9 +31,9 @@ def check_directories(directory, txt_file):
         for name in missing_names:
             print(name)
     else:
-        print("所有同学均已提交。")
+#        print("所有同学均已提交。")
         check_directories_valid = 1
-    print()
+#    print()
 
 def count_files(directory):
     # 读取到文件就把计数递增1,看着不太优雅但是很有效
@@ -52,13 +58,15 @@ def check_file_counts(directory, given_value):
             mismatched_directories.append(subdirectory)
     # 如果存在不符合预期的子目录，那么mismatched_directories列表非空
     if mismatched_directories:
+        if check_directories_valid == 0:
+            print()
         print("提交文件不全的:")
         for directory in mismatched_directories:
             print(directory)
     else:
-        print("已提交的文件数目均符合预期。")
+#        print("已提交的文件数目均符合预期。")
         check_file_counts_valid = 1
-    print()
+#    print()
 
 def check_extensions(directory, extensions):
     global check_extensions_valid
@@ -79,6 +87,8 @@ def check_extensions(directory, extensions):
                 mismatched_directories.append(os.path.basename(root))
                 break
     if mismatched_directories:
+        if check_file_counts_valid == 0 or check_directories_valid == 0:
+            print()
         print("提交文件类型有误的：")
         for directory in mismatched_directories:
             print(directory)
@@ -92,19 +102,19 @@ def check_extensions(directory, extensions):
         print()
         print("提示：本次需要提交的文件后缀名应为{}{}。".format(extensions_str, additional))
     else:
-        print("已提交的文件类型均符合预期。")
+#        print("已提交的文件类型均符合预期。")
         check_extensions_valid = 1
-    print()
+#    print()
 
 def all_done():
     if check_directories_valid + check_file_counts_valid + check_extensions_valid == 3:
-        print("好耶！全班同学均已完成“{}”所要求的任务。".format(lesson_name))
-    else:
-        print("任务尚未完成，同学仍需努力！")
-    print("="*40)
+        print("全班同学均已完成“{}”所要求的任务。".format(lesson_name))
+#    else:
+#        print("任务尚未完成，同学仍需努力！")
+#    print("="*40)
     print()
     print()
-    print()
+#    print()
 
 def automate(master_directory, txt_file):
     subdirs = [subdir for subdir in os.listdir(master_directory) if os.path.isdir(os.path.join(master_directory, subdir))]
@@ -131,5 +141,5 @@ def automate(master_directory, txt_file):
 txt_file = '/home/charles/OneDrive/轻大文件/行软23-02/行软23-02 名单.txt'
 master_directory = '/home/charles/Documents/计算机基础实践课程作业/'
 
-
+time_now()
 automate(master_directory, txt_file)
