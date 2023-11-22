@@ -141,12 +141,13 @@ def automate(master_directory, txt_file):
 if platform.system() == "Windows":
     txt_file = 'C:/Users/Charles/OneDrive/轻大文件/行软23-02/行软23-02 名单.txt'
     master_directory = 'C:/Users/Charles/OneDrive/轻大文件/行软23-02/计算机基础实践课程作业'
+    time_now()
+    automate(master_directory, txt_file)
 elif platform.system() == "Linux":
     txt_file = '/home/charles/OneDrive/轻大文件/行软23-02/行软23-02 名单.txt'
     master_directory = '/home/charles/Documents/计算机基础实践课程作业/'
+    time_now()
+    automate(master_directory, txt_file)
 else:
+    time_now()
     print("后面我忘了")
-
-
-time_now()
-automate(master_directory, txt_file)
