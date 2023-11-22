@@ -1,5 +1,6 @@
 import datetime
 import os
+import platform
 
 def time_now():
     time = datetime.datetime.now()
@@ -8,7 +9,7 @@ def time_now():
 
 def task_name(directory):
     global lesson_name
-    directory_lst = str(directory).split("/")
+    directory_lst = str(directory).replace('\\', '/').split('/')
     class_name = str(directory_lst[-2])
     lesson_name = str(directory_lst[-1])
 #    print("="*40)
@@ -19,7 +20,7 @@ def check_directories(directory, txt_file):
     global check_directories_valid
     check_directories_valid = 0
     # 从txt文件中读取所有的名字并存入names列表
-    with open(txt_file, 'r') as file:
+    with open(txt_file, 'r', encoding='utf-8') as file:
         names = [_.rstrip('\n') for _ in file.readlines()]
     # 检测给定目录中所有子目录的名字并且读入subdirectories列表
     subdirectories = [name for name in os.listdir(directory) if os.path.isdir(os.path.join(directory, name))]
@@ -137,9 +138,15 @@ def automate(master_directory, txt_file):
         all_done()
 
 
+if platform.system() == "Windows":
+    txt_file = 'C:/Users/Charles/OneDrive/轻大文件/行软23-02/行软23-02 名单.txt'
+    master_directory = 'C:/Users/Charles/OneDrive/轻大文件/行软23-02/计算机基础实践课程作业'
+elif platform.system() == "Linux":
+    txt_file = '/home/charles/OneDrive/轻大文件/行软23-02/行软23-02 名单.txt'
+    master_directory = '/home/charles/Documents/计算机基础实践课程作业/'
+else:
+    print("后面我忘了")
 
-txt_file = '/home/charles/OneDrive/轻大文件/行软23-02/行软23-02 名单.txt'
-master_directory = '/home/charles/Documents/计算机基础实践课程作业/'
 
 time_now()
 automate(master_directory, txt_file)
