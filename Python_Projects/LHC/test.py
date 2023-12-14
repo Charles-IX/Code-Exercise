@@ -1,0 +1,5 @@
+raw = input().split()
+s = str(raw[0])
+raw.remove(s)
+print(raw)
+print(s)
