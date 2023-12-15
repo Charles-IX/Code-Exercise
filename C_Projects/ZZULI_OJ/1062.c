@@ -7,6 +7,7 @@
 int main(void){
     int m, n, temp;
     scanf("%d %d", &m, &n);
-    temp = n;
-    (m > n) ? ()
+    temp = m;
+    m = (n > m) ? n : m
+    n = (n > m) ? temp
 }
