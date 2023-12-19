@@ -27,7 +27,11 @@ int main(void){
     }
     for (int i = 0; i < n - 1; i++){
         scanf("%c", &ops[i]);
+        if (ops[0] == '\n'){
+            i = -1;
+        }
     }
+    scanf("%c");
     for (int i = 0; i < n - 1; i++){
         if (ops[i] == '/'){
             if (nums[i + 1] == 0){
@@ -39,6 +43,8 @@ int main(void){
             nums[i + 1] = op(nums[i], ops[i], nums[i + i]);
         }
     }
+    printf("%d", nums[n - 1]);
+    return 0;
 }
 
 int op(int x, char op, int y){
