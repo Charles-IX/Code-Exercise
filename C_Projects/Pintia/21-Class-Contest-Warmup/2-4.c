@@ -15,17 +15,33 @@ int main(void){
     int offset;
     gets(str);
     scanf("%d", &offset);
+    offset %= 26;
     for (int i = 0; i < strlen(str); i++){
         if (isalpha(str[i])){
             str[i] += offset;
-            if (str[i] > 'z'){
+            if (islower(str[i] - offset)){
+                if (str[i] > 'z'){
                 str[i] -= 26;
+                continue;
+                }
+                else if (str[i] < 'a'){
+                    str[i] += 26;
+                    continue;
+                }
             }
-            if (str[i] < 'A'){
-                str[i] += 26;
+            else if (isupper(str[i] - offset)){
+                if (str[i] > 'Z'){
+                    str[i] -= 26;
+                    continue;
+                }
+                else if (str[i] < 'A'){
+                    str[i] += 26;
+                    continue;
+                }
             }
         }
     }
+
     printf("%s", str);
     return 0;
 }
