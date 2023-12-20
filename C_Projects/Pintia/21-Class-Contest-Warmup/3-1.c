@@ -27,23 +27,25 @@ int main(void){
     }
     for (int i = 0; i < n - 1; i++){
         scanf("%c", &ops[i]);
-        if (ops[0] == '\n'){
-            i = -1;
+        if (ops[i] == '\n' || ops[i] == ' '){
+            i -= 1;
         }
     }
-    scanf("%c");
-    for (int i = 0; i < n - 1; i++){
+    for (int i = n - 1; i > 0; i--){
         if (ops[i] == '/'){
-            if (nums[i + 1] == 0){
+            if (nums[i - 1] == 0){
                 printf("Error: %d/0", nums[i]);
                 return 1;
             }
+            else{
+                nums[i - 1] = op(nums[i], ops[i], nums[i - 1]);
+            }
         }
         else{
-            nums[i + 1] = op(nums[i], ops[i], nums[i + i]);
+            nums[i - 1] = op(nums[i], ops[i], nums[i - 1]);
         }
     }
-    printf("%d", nums[n - 1]);
+    printf("%d", nums[0]);
     return 0;
 }
 
@@ -61,3 +63,22 @@ int op(int x, char op, int y){
         break;
     }
 }
+
+// 司马出题人表意不清，数字按照顺序压入堆栈后从后往前计算
+// 真有你的嗷
+
+// 输入样例 1：
+// 5
+// 40 5 8 3 2
+// / * - +
+// 输出样例 1：
+// 2
+
+// 输入样例 2：
+// 5
+// 2 5 8 4 4
+// * / - +
+// 输出样例 2：
+// ERROR: 5/0
+
+// 这下真看不懂了，想不出来这个结果是如何计算出来的
