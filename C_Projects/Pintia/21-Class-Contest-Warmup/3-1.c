@@ -14,38 +14,54 @@
 // 将输入的数字和运算符按给定顺序分别压入堆栈 S1​ 和 S2​，将执行计算的最后结果输出。注意所有的计算都只取结果的整数部分。题目保证计算的中间和最后结果的绝对值都不超过 10^9。
 // 如果执行除法时出现分母为零的非法操作，则在一行中输出：ERROR: X/0，其中 X 是当时的分子。然后结束程序。
 
+
+/* 注释是好文明 ———— RaySky */
+
 #include <stdio.h>
-int op(int x, char op, int y);
+int op(int x, char op, int y); // op:运算函数 (为什么不命名成calc()
 
 int main(void){
-    int n;
-    scanf("%d", &n);
-    int nums[n];
-    char ops[n - 1];
-    for (int i = 0; i < n; i++){
-        scanf("%d", &nums[i]);
+    int n; //正整数n,为栈S1中的数字个数
+    scanf("%d", &n); 
+    int nums[n]; //数字栈S1
+    char ops[n - 1]; //运算符栈S2
+
+/*  for (int i = 0; i < n; i++){
+         scanf("%d", &nums[i]);
+    }                            */
+/* ↑你这样写压栈不是很...呃至少在我看来稍微有点反直觉,所以我改了一下，你应该能看懂吧( */
+
+    for(int i=n-1;i>=0;i--){
+        scanf("%d", &nums[i]); //最后输入的元素在栈的最顶上，下标为0(
     }
-    for (int i = 0; i < n - 1; i++){
+    for (int i=(n-1)-1; i>=0; i--){
+        scanf("%c", &ops[i]); //跟上面同理
+        if (ops[i] == '\n' || ops[i] == ' '){
+            i += 1;
+        }
+    }
+/*  for (int i = 0; i < n - 1; i++){
         scanf("%c", &ops[i]);
         if (ops[i] == '\n' || ops[i] == ' '){
             i -= 1;
         }
-    }
-    for (int i = n - 1; i > 0; i--){
+    }                                         */
+/* ↑改你压栈代码 梅开二度 */
+    for (int i=0; i<n; i++){
         if (ops[i] == '/'){
-            if (nums[i - 1] == 0){
-                printf("Error: %d/0", nums[i]);
+            if (nums[i] == 0){
+                printf("Error: %d/0", nums[i+1]); //根据上面改过的压栈代码稍微调了一下数组下标顺序，主要部分没改
                 return 1;
             }
             else{
-                nums[i - 1] = op(nums[i], ops[i], nums[i - 1]);
+                nums[i+1] = op(nums[i+1], ops[i], nums[i]); //同理改了下标
             }
         }
         else{
-            nums[i - 1] = op(nums[i], ops[i], nums[i - 1]);
+            nums[i+1] = op(nums[i+1], ops[i], nums[i]); //同理改了下标
         }
     }
-    printf("%d", nums[0]);
+    printf("%d", nums[n-1]);
     return 0;
 }
 
@@ -62,6 +78,7 @@ int op(int x, char op, int y){
     default:
         break;
     }
+    return 0; //只是因为编译报了个警告,看着不太爽于是加了一句(
 }
 
 // 司马出题人表意不清，数字按照顺序压入堆栈后从后往前计算
@@ -82,3 +99,39 @@ int op(int x, char op, int y){
 // ERROR: 5/0
 
 // 这下真看不懂了，想不出来这个结果是如何计算出来的
+
+
+/*
+呃实际上是这样算出来的：
+运算顺序从右向左，然后运算完的结果把左侧元素覆盖掉，以此类推直到算完
+
+样例1：
+    40 5 8 3 2
+      / * - +
+
+--> 40 5 8 5
+      / * -
+
+--> 40 5 3
+      / * 
+
+--> 40 15
+      /  
+
+--> 2
+
+
+样例2：
+    2 5 8 4 4
+     * / - +
+
+--> 2 5 8 8
+     * / -
+
+--> 2 5 0or
+     * /
+
+--> 5/0 error
+
+*/
+
