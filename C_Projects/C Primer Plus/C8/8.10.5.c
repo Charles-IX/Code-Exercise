@@ -15,7 +15,7 @@ int main(void){
         printf("Tell me, is my answer 'greater' or 'smaller' or 'hit'?\n");
         scanf("%s", arr);
         ans = judge(arr, &n, &max, &min);
-        if (ans == 0){
+        if (ans == n){
             printf("I know it's %d !\n", ans);
             break;
         }
@@ -26,21 +26,22 @@ int main(void){
         else{
             printf("Well then, is it %d ?\n", ans);
         }
+        n = ans;
     }
     return 0;
 }
 
 int judge(char arr[], int *n, int *max, int *min){
     if (strcmp(arr, "greater") == 0){
-        *max = (*max + *n) / 2;
+        *max = *n;
         return (*min + *n) / 2;
     }
     else if (strcmp(arr, "smaller") == 0){
-        *min = (*min + *n) / 2;
+        *min = *n;
         return (*max + *n) / 2;
     }
     else if (strcmp(arr, "hit") == 0){
-        return 0;
+        return *n;
     }
     else return 114;
 }
