@@ -38,9 +38,4 @@ while True:
             print("Number {} is not a palindrom".format(n))
         else:
             print("Number {} is palindrom in basis".format(n), end=" ")
-            length = len(lst)
-            for m in range(length):
-                if m != length - 1:
-                    print("{}".format(lst[m]), end=" ")
-                else:
-                    print("{}".format(lst[m]))
+            print(' '.join(map(str, lst)))

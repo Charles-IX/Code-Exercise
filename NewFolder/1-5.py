@@ -13,7 +13,7 @@ invalid = 0
 array = [''] * 9
 row = [''] * 9
 block = []
-for r in range(t):
+for _ in range(t):
     invalid = 0
     for i in range(9):
         array[i] = ['']*9
