@@ -18,9 +18,7 @@ for _ in range(t):
     for i in range(9):
         array[i] = ['']*9
     for i in range(9):
-        array[i] = input().split()
-        for j in range(9):
-            array[i][j] = int(array[i][j])
+        array[i] = list(map(int, input().split()))
 
     for i in range(9):
         for k in range(1,10):
