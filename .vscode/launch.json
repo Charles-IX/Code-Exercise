@@ -1,6 +1,12 @@
 {
     "configurations": [
         {
+            "type": "java",
+            "name": "Java: javac 生成和调试活动文件",
+            "request": "launch",
+            "mainClass": ""
+        },
+        {
             "name": "C/C++: g++.exe 生成和调试活动文件",
             "type": "cppdbg",
             "request": "launch",
