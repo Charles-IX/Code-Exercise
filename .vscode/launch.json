@@ -1,8 +1,15 @@
 {
     "configurations": [
         {
-            "type": "java",
+            "name": "Python: 调试活动文件",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "Java: javac 生成和调试活动文件",
+            "type": "java",
             "request": "launch",
             "mainClass": ""
         },
@@ -31,12 +38,12 @@
             "linux": {
                 "preLaunchTask": "C/C++: gcc 生成活动文件",
                 "miDebuggerPath": "/usr/bin/gdb",
-                "MIMode": "gdb",
+                "MIMode": "gdb"
             },
             "windows": {
                 "preLaunchTask": "C/C++: gcc.exe 生成活动文件",
                 "miDebuggerPath": "C:\\msys64\\mingw64\\bin\\gdb.exe",
-                "MIMode": "gdb",
+                "MIMode": "gdb"
             }
         },
         {
